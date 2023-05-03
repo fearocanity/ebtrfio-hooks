@@ -3,8 +3,8 @@
 # variables
 token_fb="${1}"
 ggl_token="${2}"
-folder_ids=('1cwkdwlNKmJyF6RAwapv0Marpv1i_AOVh' '1jFMsiNLCQYKuBuAsBSdouFjafYiixist' '16R-L0OyZWTKmbZtrZJbTEDHBir9Jam4L' '1K1L0ddicvA5A4ek4mhrDZm5NeOq5UhmV')
-frm_limt=('4322' '4264' '4971' '4971')
+folder_ids=('1cwkdwlNKmJyF6RAwapv0Marpv1i_AOVh' '1jFMsiNLCQYKuBuAsBSdouFjafYiixist' '16R-L0OyZWTKmbZtrZJbTEDHBir9Jam4L' '1K1L0ddicvA5A4ek4mhrDZm5NeOq5UhmV' '1GrLgj9MR2HrbI3krLQpIa-M2In7_yiUA')
+frm_limt=('4322' '4264' '4971' '4971' '4972')
 node="220726777558309/comments"
 base_urlorigin_fb="https://graph.facebook.com"
 base_urlorigin_ggl="https://www.googleapis.com"
