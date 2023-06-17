@@ -25,11 +25,11 @@ jobs:
           if [ "${LATEST_COMMIT}" != "${GITHUB_SHA}" ]; then
             echo "Current commit is not the latest" >&2
             curl -H "Authorization: Bearer ${GITHUB_TOKEN}" -H "Accept: application/vnd.github.v3+json" -X POST -d '{"ref":"'"${{ github.ref }}"'","inputs":{}}' "https://api.github.com/repos/${{ github.repository }}/actions/workflows/auto.yaml/dispatches"
-            skip_jobs="true"
+            echo 'skip_jobs=true' >> $GITHUB_ENV
           fi
      
       - name: execute
-        if: steps.check_latest.outputs.skip_jobs != 'true'
+        if: ${{ env.SKIP_JOBS != 'true' }}
         continue-on-error: true
         env:
           tok_fb: ${{ secrets.TOK_FB }}
@@ -40,7 +40,7 @@ jobs:
           bash main.sh "${tok_fb}" "${ggl_tok}"
         
       - name: update
-        if: steps.check_latest.outputs.skip_jobs != 'true'
+        if: ${{ env.SKIP_JOBS != 'true' }}
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
           commit_message: "updated"
