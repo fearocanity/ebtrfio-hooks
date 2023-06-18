@@ -16,7 +16,7 @@ jobs:
       - name: "checkout"
         uses: actions/checkout@v3
         
-      - name: "check latest"
+      - name: "check_latest"
         id: check_latest
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -25,9 +25,9 @@ jobs:
           if [ "${LATEST_COMMIT}" != "${GITHUB_SHA}" ]; then
             echo "Current commit is not the latest" >&2
             curl -H "Authorization: Bearer ${GITHUB_TOKEN}" -H "Accept: application/vnd.github.v3+json" -X POST -d '{"ref":"'"${{ github.ref }}"'","inputs":{}}' "https://api.github.com/repos/${{ github.repository }}/actions/workflows/auto.yaml/dispatches"
-            skip="true"
+            echo "skip=true" >> $GITHUB_OUTPUT
           else
-            skip="false"
+            echo "skip=false" >> $GITHUB_OUTPUT
           fi
      
       - name: execute
