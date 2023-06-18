@@ -16,7 +16,7 @@ jobs:
         run: |
           trig_actor="${{ github.triggering_actor }}"
           repo_owner="${{ github.repository_owner }}"
-          if [ "${trig_actor}" ！= "${repo_owner}" ] || [ "${trig_actor}" != 'github-actions[bot]' ]; then
+          if [ "${trig_actor}" != "${repo_owner}" ] || [ "${trig_actor}" != 'github-actions[bot]' ]; then
              echo "Due to restriction, the run was blocked ($trig_actor)... exiting." >&2
              exit 1
           fi
