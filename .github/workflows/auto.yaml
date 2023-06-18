@@ -11,11 +11,18 @@ concurrency:
 jobs:
  inits:
     runs-on: ubuntu-latest
-    if: ${{ github.triggering_actor == github.repository_owner || github.triggering_actor == 'github-actions' }}
     steps:
+      - name: "checker"
+        run: |
+          trig_actor="${{ github.triggering_actor }}"
+          if [[ "${trig_actor}" != "${{ github.repository_owner }}" ]] || [[ "${trig_actor}" != github-actions** ]]; then
+             echo "Due to restriction, the run was blocked... exiting." >&2
+             exit 1
+          fi
+
       - name: "checkout"
         uses: actions/checkout@v3
-        
+
       - name: "check_latest"
         id: check_latest
         env:
@@ -29,7 +36,7 @@ jobs:
           else
             echo "skip=false" >> $GITHUB_OUTPUT
           fi
-     
+
       - name: execute
         if: ${{ steps.check_latest.outputs.skip == 'false' }}
         continue-on-error: true
@@ -40,7 +47,7 @@ jobs:
         run: |
           export file="${file}"
           bash main.sh "${tok_fb}" "${ggl_tok}"
-        
+
       - name: update
         if: ${{ steps.check_latest.outputs.skip == 'false' }}
         uses: stefanzweifel/git-auto-commit-action@v4
