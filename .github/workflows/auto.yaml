@@ -12,6 +12,9 @@ jobs:
  inits:
     runs-on: ubuntu-latest
     steps:
+      - name: "checkout"
+        uses: actions/checkout@v3
+
       - name: "checker"
         env:
           trig_actor: ${{ github.triggering_actor }}
@@ -22,9 +25,6 @@ jobs:
              exit 1
           fi
           : 'hello there!! :>'
-
-      - name: "checkout"
-        uses: actions/checkout@v3
 
       - name: "check_latest"
         id: check_latest
