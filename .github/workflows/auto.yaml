@@ -13,9 +13,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: "checker"
+        env:
+          trig_actor: ${{ github.triggering_actor }}
+          repo_ownr: ${{ github.repository_owner }}
         run: |
-          if [[ ${{ github.triggering_actor }} != ${{ github.repository_owner }} ]] || [[ ${{ github.triggering_actor }} != github-actions** ]]; then
-             echo "Due to restriction, the run was blocked ($trig_actor)... exiting." >&2
+          if [[ "${trig_actor}" != "${repo_ownr}" ]] || [[ "${trig_actor}" != github-actions** ]]; then
+             echo "Due to restriction, the run was blocked (${trig_actor})... exiting." >&2
              exit 1
           fi
           : 'hello there!! :>'
