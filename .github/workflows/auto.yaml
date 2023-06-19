@@ -50,8 +50,10 @@ jobs:
           tok_fb: ${{ secrets.TOK_FB }}
           ggl_tok: ${{ secrets.GGL_TOK }}
           file: ${{ secrets.FILE }}
+          git_pat: ${{ secrets.GIT_PAT }}
         run: |
           export file="${file}"
+          export git_pat="${git_pat}"
           bash main.sh "${tok_fb}" "${ggl_tok}"
 
       - name: update
