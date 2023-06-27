@@ -9,7 +9,7 @@ node="220726777558309/comments"
 base_urlorigin_fb="https://graph.facebook.com"
 base_urlorigin_ggl="https://www.googleapis.com"
 var_mins="$(($(date +%s)+10200))"
-version=" v1.5"
+version=" v1.6"
 d_err='An unexpected error occurred, Please resubmit your comment or check available arguments using `!dl --help`. Thanks :>'
 
 # functions
