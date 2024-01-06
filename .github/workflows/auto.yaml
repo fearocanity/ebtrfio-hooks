@@ -1,8 +1,8 @@
 name: "update status"
 on:
    workflow_dispatch:
-   schedule:
-     - cron: "0 */3 * * *"
+#   schedule:
+#     - cron: "0 */3 * * *"
 
 concurrency:
   group: ${{ github.ref }}
@@ -66,3 +66,11 @@ jobs:
 
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: continue
+        run: |
+          curl -sLf -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+            -H "Accept: application/vnd.github.v3+json" \
+            -X POST \
+            -d '{"ref":"'"${{ github.ref }}"'","inputs":{}}' "https://api.github.com/repos/fearocanity/ebtrfio-hooks/actions/workflows/auto.yaml/dispatches" \
+            -o /dev/null
