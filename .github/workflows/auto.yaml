@@ -54,7 +54,7 @@ jobs:
         run: |
           export file="${file}"
           export git_pat="${git_pat}"
-          bash main.sh "${tok_fb}" "${ggl_tok}"
+          bash -x main.sh "${tok_fb}" "${ggl_tok}"
 
       - name: update
         if: ${{ steps.check_latest.outputs.skip == 'false' }}
