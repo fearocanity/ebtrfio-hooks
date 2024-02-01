@@ -54,6 +54,7 @@ jobs:
         run: |
           export file="${file}"
           export git_pat="${git_pat}"
+          pip install gradio_client
           bash main.sh "${tok_fb}" "${ggl_tok}"
 
       - name: update
